@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -80,3 +81,14 @@ Route::get('/user/change/password',[IndexController::class, 'userChangePassword'
 
 Route::post('/user/password/store',[IndexController::class, 'updatePassword'])->name('user.password.store');
 Route::post('/user/profile/store',[IndexController::class, 'userProfileStore'])->name('user.profile.store');
+
+
+// brand routes
+
+Route::prefix('brand')->group(function(){
+
+    Route::get('/all',[BrandController::class, 'allBrands'])->name('all.brands');
+
+
+
+});
