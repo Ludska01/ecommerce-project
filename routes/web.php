@@ -91,4 +91,9 @@ Route::prefix('brand')->group(function(){
 
 
 
+
+
+    Route::post('/store',[BrandController::class, 'storeBrand'])->name('brand.store');
+
+
 });
