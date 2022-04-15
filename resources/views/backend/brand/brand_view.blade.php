@@ -37,10 +37,10 @@
                            <tr>
                                 <td>{{ $item->brand_name_en }}</td>
                                 <td>{{ $item->brand_name_srb }}</td>
-                                <td><img src="{{ asset('$item->brand_image') }}" alt="No image" style="width: 70px; height:40px;"></td>
-                                <td>
-                                    <a href="" class="btn btn-info">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
+                                <td><img src="{{ asset($item->brand_image) }}" alt="No image" style="width: 70px; height:40px;"></td>
+                                <td class="">
+                                    <a href="{{ route('edit.brand',$item->id) }}" class="btn btn-info btn-md" title="edit data"><i class=" fa fa-pencil"></i></a>
+                                    <a href="{{ route('delete.brand',$item->id) }}" class="btn btn-danger btn-md" id="delete" title="delete data"><i class="fa fa-trash"></i></a>
                                 </td>
                            </tr>
                           @endforeach
@@ -88,9 +88,9 @@
                     
 
                         <div class="form-group">
-                            <h5>Brand imgage<span class="text-danger">*</span></h5>
+                            <h5>Brand image<span class="text-danger">*</span></h5>
                             <div class="controls">
-                                <input type="file" name="brand_image" class="form-control" > </div>
+                                <input type="file" name="brand_image" class="form-control"  required> </div>
                         </div>
 
 						<div class="text-xs-right mt-10">

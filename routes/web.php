@@ -88,11 +88,13 @@ Route::post('/user/profile/store',[IndexController::class, 'userProfileStore'])-
 Route::prefix('brand')->group(function(){
 
     Route::get('/all',[BrandController::class, 'allBrands'])->name('all.brands');
+    Route::get('/edit/{id}',[BrandController::class, 'editBrand'])->name('edit.brand');
+    Route::get('/delete/{id}',[BrandController::class, 'deleteBrand'])->name('delete.brand');
 
 
 
 
-
+    Route::post('/update/{id}',[BrandController::class, 'updateBrand'])->name('brand.update');
     Route::post('/store',[BrandController::class, 'storeBrand'])->name('brand.store');
 
 
