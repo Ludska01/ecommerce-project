@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -96,6 +97,23 @@ Route::prefix('brand')->group(function(){
 
     Route::post('/update/{id}',[BrandController::class, 'updateBrand'])->name('brand.update');
     Route::post('/store',[BrandController::class, 'storeBrand'])->name('brand.store');
+
+
+});
+
+// category routes 
+
+Route::prefix('category')->group(function(){
+
+    Route::get('/all',[CategoryController::class, 'allCategory'])->name('all.category');
+    Route::get('/edit/{id}',[CategoryController::class, 'editCategory'])->name('edit.category');
+    Route::get('/delete/{id}',[CategoryController::class, 'deleteCategory'])->name('delete.category');
+
+
+
+
+     Route::post('/update/{id}',[CategoryController::class, 'updateCategory'])->name('category.update');
+     Route::post('/store',[CategoryController::class, 'storeCategory'])->name('category.store');
 
 
 });

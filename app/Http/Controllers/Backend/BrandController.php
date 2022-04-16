@@ -21,7 +21,7 @@ class BrandController extends Controller
         $request->validate([
             'brand_name_en'=>'required',
             'brand_name_srb'=>'required',
-            'brand_name_en'=>'required',
+            'brand_image'=>'required',
 
         ]);
 
