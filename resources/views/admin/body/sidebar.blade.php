@@ -55,14 +55,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('all.category') }}"><i class="ti-more"></i>All categories</a></li>
+            <li><a href="{{ route('all.category') }}"><i class="ti-more {{ ($route == 'all.category') ? 'active':''}}"></i>All categories</a></li>
+            <li><a href="{{ route('all.subcategory') }}"><i class="ti-more {{ ($route == 'all.subcategory') ? 'active':''}}"></i>All SubCategories</a></li>
+            <li><a href="{{ route('all.subsubcategory') }}"><i class="ti-more {{ ($route == 'all.subsubcategory') ? 'active':''}}"></i>All Sub->SubCategories</a></li>
           </ul>
         </li>
 		
         <li class="treeview">
           <a href="#">
-            <i data-feather="file"></i>
-            <span>Pages</span>
+            <i data-feather="shopping-bag"></i>
+            <span>Products</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
