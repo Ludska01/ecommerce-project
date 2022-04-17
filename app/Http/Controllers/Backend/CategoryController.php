@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,6 +14,8 @@ class CategoryController extends Controller
 
         return view('backend.category.category_view',compact('category'));
     }
+
+    
 
 
     public function storeCategory(Request $request){

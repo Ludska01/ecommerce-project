@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubSubCategoryController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -124,13 +125,15 @@ Route::prefix('category')->group(function(){
     Route::get('/sub/edit/{id}',[SubCategoryController::class, 'editSubCategory'])->name('edit.subcategory');
     Route::get('/sub/delete/{id}',[SubCategoryController::class, 'deleteSubCategory'])->name('delete.subcategory');
 
-
+    Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
 
 
     Route::post('/sub/update/{id}',[SubCategoryController::class, 'updateSubCategory'])->name('subcategory.update');
     Route::post('/sub/store',[SubCategoryController::class, 'storeSubCategory'])->name('subcategory.store');
 
 //sub subcategory
+
+    Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubSubCategoryController::class, 'GetSubSubCategory']);
 
     Route::get('/sub/sub/all',[SubSubCategoryController::class, 'allSSubCategory'])->name('all.subsubcategory');
     Route::get('/sub/sub/edit/{id}',[SubSubCategoryController::class, 'editSSubCategory'])->name('edit.subsubcategory');
@@ -141,5 +144,16 @@ Route::prefix('category')->group(function(){
 
     Route::post('/sub/sub/update/{id}',[SubSubCategoryController::class, 'updateSSubCategory'])->name('subsubcategory.update');
     Route::post('/sub/sub/store',[SubSubCategoryController::class, 'storeSSubCategory'])->name('subsubcategory.store');
+
+});
+
+// admin products
+
+
+Route::prefix('product')->group(function(){
+
+    Route::get('/add',[ProductController::class, 'addProduct'])->name('add.product');
+    
+
 
 });

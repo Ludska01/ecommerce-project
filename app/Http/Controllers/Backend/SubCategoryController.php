@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -17,6 +18,13 @@ class SubCategoryController extends Controller
         return view('backend.category.subcategory_view',compact('subcategory','categories'));
     }
 
+    public function GetSubCategory($category_id){
+
+        $subcat = SubCategory::where('category_id',$category_id)->orderBy('subcategory_name_en','ASC')->get();
+        return json_encode($subcat);
+        
+     }
+    
 
     public function storeSubCategory(Request $request){
 
