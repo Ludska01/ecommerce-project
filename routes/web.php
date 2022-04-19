@@ -153,6 +153,8 @@ Route::prefix('category')->group(function(){
 Route::prefix('product')->group(function(){
 
     Route::get('/add',[ProductController::class, 'addProduct'])->name('add.product');
+    Route::get('/manage',[ProductController::class, 'manageProduct'])->name('manage.product');
+    Route::get('/edit/{id}',[ProductController::class, 'editProduct'])->name('edit.product');
 
 
 
@@ -161,6 +163,7 @@ Route::prefix('product')->group(function(){
 
 
     Route::post('/store',[ProductController::class, 'productStore'])->name('product.store');
+    Route::post('/update/{id}',[ProductController::class, 'productUpdate'])->name('product.update');
     
 
 
