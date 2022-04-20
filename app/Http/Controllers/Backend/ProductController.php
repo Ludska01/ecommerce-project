@@ -11,6 +11,7 @@ use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon as SupportCarbon;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -76,8 +77,8 @@ class ProductController extends Controller
 
             
             $make_name= hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-            Image::make($img)->resize(917,1000)->save('upload/products/multi-img/'.$name_gen);
-            $upload = 'upload/products/multi-img/'.$name_gen;
+            Image::make($img)->resize(917,1000)->save('upload/products/multi-img/'.$make_name);
+            $upload = 'upload/products/multi-img/'.$make_name;
 
             MultiImg::insert([
 
@@ -187,8 +188,136 @@ class ProductController extends Controller
 
 
 
+    public function multiImageUpdate(Request $request){
+
+        $images = $request->multi_img;
+
+        foreach($images as $id => $image){
+
+            $imgDel=MultiImg::find($id);
+
+            unlink($imgDel->photo_name);
+            
+            $name_gen= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/products/multi-img/'.$name_gen);
+            $save_url = 'upload/products/multi-img/'.$name_gen;
+
+            MultiImg::where('id',$id)->update([
+
+                'photo_name'=>$save_url,
+                'updated_at'=> Carbon::now(),
+
+            ]);
 
 
+
+        }
+
+
+        $notification = array(
+            'message' => 'Product images updated successfully',
+            'alert-type' => 'success'
+        );
+
+
+        return redirect()->back()->with($notification);
+
+
+
+    }
+
+    public function thumbnailUpdate(Request $request,$id){
+
+        $imgDel = Product::find($id);
+
+        $image = $request->product_thumbnail;
+
+        unlink($imgDel->product_thumbnail);
+            
+            $name_gen= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
+            $save_url = 'upload/products/thumbnail/'.$name_gen;
+
+            Product::where('id',$id)->update([
+                'product_thumbnail'=>$save_url,
+                'updated_at'=>Carbon::now(),
+
+            ]);
+
+            $notification = array(
+                'message' => 'Product images updated successfully',
+                'alert-type' => 'success'
+            );
+    
+    
+            return redirect()->back()->with($notification);
+    }
+
+
+    public function deleteMultiImg($id){
+
+        $old_img = MultiImg::find($id);
+
+        unlink($old_img->photo_name);
+
+        MultiImg::find($id)->delete();
+
+
+        $notification = array(
+            'message' => 'Product images deleted successfully',
+            'alert-type' => 'alert'
+        );
+
+
+        return redirect()->back()->with($notification);
+
+
+
+
+    }
+
+
+    public function ProductInactive($id){
+        Product::findOrFail($id)->update(['status' => 0]);
+        $notification = array(
+           'message' => 'Product Inactive',
+           'alert-type' => 'success'
+       );
+
+       return redirect()->back()->with($notification);
+    }
+
+
+ public function ProductActive($id){
+     Product::findOrFail($id)->update(['status' => 1]);
+        $notification = array(
+           'message' => 'Product Active',
+           'alert-type' => 'success'
+       );
+
+       return redirect()->back()->with($notification);
+
+    }
+
+    public function ProductDelete($id){
+        $product = Product::findOrFail($id);
+        unlink($product->product_thumbnail);
+        Product::findOrFail($id)->delete();
+
+        $images = MultiImg::where('product_id',$id)->get();
+        foreach ($images as $img) {
+           unlink($img->photo_name);
+            MultiImg::where('product_id',$id)->delete();
+        }
+
+        $notification = array(
+           'message' => 'Product Deleted Successfully',
+           'alert-type' => 'success'
+       );
+
+       return redirect()->back()->with($notification);
+
+    }// 
 
 
 

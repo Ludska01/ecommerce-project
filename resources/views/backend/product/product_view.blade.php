@@ -33,6 +33,7 @@
                               <th>Product discount price</th>
                               <th>Product code</th>
                               <th>Qty</th>
+                              <th>Status</th>
                               <th>Action</th>
                           </tr>
                       </thead>
@@ -43,16 +44,42 @@
                                 <td>{{ $item->product_name_en }}</td>
                                 <td>{{ $item->product_name_srb }}</td>
                                 <td>{{ $item->selling_price}}</td>
-                                @if (isset($item->discount_price))
-                                <td>{{ $item->discount_price }}</td>
-                                @else
-                                <td>Not on discount</td>
-                                @endif
+                                <td> 
+                                  @if($item->discount_price == NULL)
+                                  <span class="badge badge-pill badge-danger">No Discount</span>
+                           
+                                  @else
+                                  @php
+                                  $amount = $item->selling_price - $item->discount_price;
+                                  $discount = ($amount/$item->selling_price) * 100;
+                                  @endphp
+                                      <span class="badge badge-pill badge-danger">{{ round($discount)  }} %</span>
+                           
+                                  @endif
+                           
+                           
+                           
+                                </td>
                                 <td>{{ $item->product_code}}</td>
+                               
+
                                 <td>{{ $item->product_qty}}</td>
+                                <td>
+                                @if ($item->status == 1)
+                                <span class="badge badge-pill badge-success">Active</span>
+                                @else
+                                <span class="badge badge-pill badge-danger">Inactive</span>
+                                @endif
+                                </td>
                                 <td class="">
                                     <a href="{{ route('edit.product',$item->id) }}" class="btn btn-info btn-md" title="edit data"><i class=" fa fa-pencil"></i></a>
-                                    <a href="{{ route('delete.category',$item->id) }}" class="btn btn-danger btn-md" id="delete" title="delete data"><i class="fa fa-trash"></i></a>
+                                    <a href="{{ route('product.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
+
+                                    @if($item->status == 1)
+                                      <a href="{{ route('product.inactive',$item->id) }}" class="btn btn-danger" title="Inactive Now"><i class="fa fa-arrow-down"></i> </a>
+                                        @else
+                                      <a href="{{ route('product.active',$item->id) }}" class="btn btn-success" title="Active Now"><i class="fa fa-arrow-up"></i> </a>
+                                        @endif
                                 </td>
                            </tr>
                           @endforeach
