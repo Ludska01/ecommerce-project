@@ -28,10 +28,10 @@
                           $subsubcats = App\Models\SubSubCategory::where('subcategory_id',$subcat->id)->orderBy('subsubcategory_name_en','ASC')->get();
                         @endphp
                          
-                          <h2 class="title">{{(session()->get('language')=='english') ? $subcat->subcategory_name_en : $subcat->subcategory_name_srb}}</h2>
+                          <h2 class="title">{{(session()->get('language')=='serbian') ?$subcat->subcategory_name_srb : $subcat->subcategory_name_en }}</h2>
                           <ul class="links">
                             @foreach ( $subsubcats as $subsubcat)
-                              <li><a href="#">{{(session()->get('language')=='english') ? $subsubcat->subsubcategory_name_en : $subsubcat->subsubcategory_name_srb}}</a></li>
+                              <li><a href="#">{{(session()->get('language')=='serbian') ? $subsubcat->subsubcategory_name_srb : $subsubcat->subsubcategory_name_en }}</a></li>
                             @endforeach
                             
                             
@@ -823,12 +823,13 @@
           
           <div id="hero">
             <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-              <div class="item" style="background-image: url(assets/images/sliders/01.jpg);">
+              @foreach($sliders as $slider)
+              <div class="item" style="background-image: url({{ asset($slider->slider_image) }});">
                 <div class="container-fluid">
                   <div class="caption bg-color vertical-center text-left">
-                    <div class="slider-header fadeInDown-1">Top Brands</div>
-                    <div class="big-text fadeInDown-1"> New Collections </div>
-                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
+          
+                    <div class="big-text fadeInDown-1">{{ $slider->title }} </div>
+                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{ $slider->description }}</span> </div>
                     <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                   </div>
                   <!-- /.caption --> 
@@ -836,20 +837,7 @@
                 <!-- /.container-fluid --> 
               </div>
               <!-- /.item -->
-              
-              <div class="item" style="background-image: url(assets/images/sliders/02.jpg);">
-                <div class="container-fluid">
-                  <div class="caption bg-color vertical-center text-left">
-                    <div class="slider-header fadeInDown-1">Spring 2016</div>
-                    <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span> </div>
-                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
-                  </div>
-                  <!-- /.caption --> 
-                </div>
-                <!-- /.container-fluid --> 
-              </div>
-              <!-- /.item --> 
+              @endforeach
               
             </div>
             <!-- /.owl-carousel --> 

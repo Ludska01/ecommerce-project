@@ -173,7 +173,7 @@
                   
                 
 
-                  <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ (session()->get('language')=='english') ? $category->category_name_en : $category->category_name_srb }}</a>
+                  <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ (session()->get('language')=='serbian') ?   $category->category_name_srb : $category->category_name_en }}</a>
                     <ul class="dropdown-menu container">
                       <li>
                         <div class="yamm-content ">
@@ -187,10 +187,10 @@
                               $subsubcats = App\Models\SubSubCategory::where('subcategory_id',$subcat->id)->orderBy('subsubcategory_name_en','ASC')->get();
                             @endphp
                              
-                              <h2 class="title">{{(session()->get('language')=='english') ? $subcat->subcategory_name_en : $subcat->subcategory_name_srb}}</h2>
+                              <h2 class="title">{{(session()->get('language')=='serbian') ?  $subcat->subcategory_name_srb : $subcat->subcategory_name_en }}</h2>
                               <ul class="links">
                                 @foreach ( $subsubcats as $subsubcat)
-                                  <li><a href="#">{{(session()->get('language')=='english') ? $subsubcat->subsubcategory_name_en : $subsubcat->subsubcategory_name_srb}}</a></li>
+                                  <li><a href="#">{{(session()->get('language')=='serbian') ?  $subsubcat->subsubcategory_name_srb : $subsubcat->subsubcategory_name_en }}</a></li>
                                 @endforeach
                                 
                                 
