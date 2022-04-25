@@ -198,7 +198,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/',[IndexController::class, 'index']);
+Route::get('/',[IndexController::class, 'index'])->name('index');
 Route::get('/user/logout',[IndexController::class, 'userLogout'])->name('user.logout');
 Route::get('/user/profile',[IndexController::class, 'userProfile'])->name('user.profile');
 Route::get('/user/change/password',[IndexController::class, 'userChangePassword'])->name('user.change.password');
@@ -218,7 +218,9 @@ Route::get('/language/serbian', [LanguageController::class, 'serbian'])->name('s
 Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language'); 
 
 
+//product 
 
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
 
-
+Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
 
