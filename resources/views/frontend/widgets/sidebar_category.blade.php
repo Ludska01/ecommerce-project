@@ -28,7 +28,7 @@
       
          @foreach($subcategories as $subcategory)
               <ul>
-                <li><a href="#">
+                <li><a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
                     @if(session()->get('language') == 'serbian') {{ $subcategory->subcategory_name_srb }} @else {{ $subcategory->subcategory_name_en }} @endif</a></li>
       
               </ul>

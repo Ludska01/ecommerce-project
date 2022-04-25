@@ -108,14 +108,63 @@ class IndexController extends Controller
     public function productDetails($id,$slug){
 		$product = Product::findOrFail($id);
         $multiImag = MultiImg::where('product_id',$id)->get();
-        return view('frontend.product.product_details',compact('product','multiImag'));
+
+        $color_en = $product->product_color_en;
+		$product_color_en = explode(',', $color_en);
+
+		$color_srb = $product->product_color_srb;
+		$product_color_srb = explode(',', $color_srb);
+
+		$size_en = $product->product_size_en;
+		$product_size_en = explode(',', $size_en);
+
+		$size_srb = $product->product_size_srb;
+		$product_size_srb = explode(',', $size_srb);
+
+        $cat_id = $product->category_id;
+		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+
+        return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_srb','product_size_en','product_size_srb','relatedProduct'));
 
 	}
 
     public function tagWiseProduct($tag){
 		$products = Product::where('status',1)->where('product_tags_en',$tag)->orWhere('product_tags_srb',$tag)->orderBy('id','DESC')->paginate(3);
 		
-		return view('frontend.tags.tags_view',compact('products'));
+		return view('frontend.product.product_filter_view',compact('products'));
+
+	}
+
+    public function subCatWiseProduct($subcat_id,$slug){
+
+		$products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(6);
+		
+		return view('frontend.product.product_filter_view',compact('products'));
+
+	}
+
+    public function subSubCatWiseProduct($subsubcat_id,$slug){
+		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
+		
+		return view('frontend.product.product_filter_view',compact('products'));
+
+	}
+
+    public function productViewAjax($id){
+		$product = Product::with('subSubCategory','brand')->find($id);
+
+		$color = $product->product_color_en;
+		$product_color = explode(',', $color);
+
+		$size = $product->product_size_en;
+		$product_size = explode(',', $size);
+
+		return response()->json(array(
+			'product' => $product,
+			'color' => $product_color,
+			'size' => $product_size,
+
+		));
 
 	}
 }

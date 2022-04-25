@@ -1,21 +1,15 @@
-@php
-        use App\Models\Product;
-        use App\Models\Brand;
-        $skip_brand_1 = Brand::skip(1)->first();
-    	$skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
-@endphp
-
-
-
-
 <section class="section featured-product wow fadeInUp">
     <h3 class="section-title">
-@if(session()->get('language') == 'serbian') {{ $skip_brand_1->brand_name_srb }} @else {{ $skip_brand_1->brand_name_en }} @endif
+        @if(session()->get('language') == 'serbian')
+        Slicni proizvodi
+        @else
+        Related products
+        @endif
       </h3>
     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
 
-      @foreach($skip_brand_product_1 as $product)
+      @foreach($relatedProduct as $product)
       <div class="item item-carousel">
               <div class="products">
                 <div class="product">

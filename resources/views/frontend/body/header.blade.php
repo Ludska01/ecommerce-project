@@ -187,10 +187,10 @@
                               $subsubcats = App\Models\SubSubCategory::where('subcategory_id',$subcat->id)->orderBy('subsubcategory_name_en','ASC')->get();
                             @endphp
                              
-                              <h2 class="title">{{(session()->get('language')=='serbian') ?  $subcat->subcategory_name_srb : $subcat->subcategory_name_en }}</h2>
+                              <a href="{{ url('subcategory/product/'.$subcat->id.'/'.$subcat->subcategory_slug_en ) }}"><h2 class="title">{{(session()->get('language')=='serbian') ?  $subcat->subcategory_name_srb : $subcat->subcategory_name_en }}</h2></a>
                               <ul class="links">
                                 @foreach ( $subsubcats as $subsubcat)
-                                  <li><a href="#">{{(session()->get('language')=='serbian') ?  $subsubcat->subsubcategory_name_srb : $subsubcat->subsubcategory_name_en }}</a></li>
+                                  <li><a href="{{ url('subsubcategory/product/'.$subsubcat->id.'/'.$subsubcat->subsubcategory_slug_en ) }}">{{(session()->get('language')=='serbian') ?  $subsubcat->subsubcategory_name_srb : $subsubcat->subsubcategory_name_en }}</a></li>
                                 @endforeach
                                 
                                 
