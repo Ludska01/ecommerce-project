@@ -98,7 +98,7 @@
 </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
-							<h1 class="name">
+							<h1 class="name" id="pname">
                                 @if(session()->get('language') == 'serbian') 
                                 {{ $product->product_name_srb }} 
                                 @else 
@@ -128,7 +128,11 @@
 									</div>
 									<div class="col-sm-9">
 										<div class="stock-box">
+											@if ($product->status==1)
 											<span class="value">In Stock</span>
+											@else
+											<span class="value">Out of Stock</span>
+											@endif
 										</div>	
 									</div>
 								</div><!-- /.row -->	
@@ -178,7 +182,7 @@
 									<div class="form-group">
 									@if (session()->get('language') == 'serbian')
 									<label class="info-title control-label">Izaberi broju<span> </span></label>
-									<select class="form-control unicase-form-control selectpicker" style="display: none;">
+									<select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
 										<option selected="" disabled="">--Izaberi boju--</option>
 										@foreach($product_color_srb as $color)
 										<option value="{{ $color }}">{{ ucwords($color) }}</option>
@@ -186,7 +190,7 @@
 									</select> 
 									@else
 									<label class="info-title control-label">Choose Color <span> </span></label>
-										<select class="form-control unicase-form-control selectpicker" style="display: none;">
+									<select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
 											<option selected="" disabled="">--Choose Color--</option>
 											@foreach($product_color_en as $color)
 											<option value="{{ $color }}">{{ ucwords($color) }}</option>
@@ -202,9 +206,12 @@
 											<div class="col-sm-6">
 									
 									<div class="form-group">
+									@if($product->product_size_en == null)
+
+									@else	
 										@if (session()->get('language') == 'serbian')
 										<label class="info-title control-label">Izaberi velicinu<span> </span></label>
-										<select class="form-control unicase-form-control selectpicker" style="display: none;">
+										<select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
 											<option selected="" disabled="">--Izaberi velicinu--</option>
 											@foreach($product_size_srb as $size)
 											<option value="{{ $size }}">{{ ucwords($size) }}</option>
@@ -212,14 +219,14 @@
 										</select> 
 										@else
 										<label class="info-title control-label">Choose Size <span> </span></label>
-										<select class="form-control unicase-form-control selectpicker" style="display: none;">
+										<select class="form-control unicase-form-control selectpicker" style="display: none;" required>
 											<option selected="" disabled="">--Choose Size--</option>
 											@foreach($product_size_en as $size)
 											<option value="{{ $size }}">{{ ucwords($size) }}</option>
 											 @endforeach
 										</select> 
 										@endif
-										
+									@endif
 									
 									</div> <!-- // end form group -->
 									
@@ -253,13 +260,19 @@
 															  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
 															  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
 															</div>
-															<input type="text" value="1">
+															<input type="text" id="qty" value="1" min="1">
 													  </div>
 													</div>
 												</div>
-									
+												<input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+
 												<div class="col-sm-7">
-													<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+													@if ($product->status==1)
+													<button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+													@else
+													<button class="btn "><i class="fa fa-shopping-cart inner-right-vs"></i> OUT OF STOCK</button>
+													@endif
+													
 												</div>
 									
 									
