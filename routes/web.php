@@ -336,3 +336,11 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
     Route::get('/cart-increment/{rowId}', [CartPageController::class, 'cartIncrement']);
 
     Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'cartDecrement']);
+
+  // Frontend Coupon Option
+
+    Route::post('/coupon-apply', [CartController::class, 'couponApply']);
+
+    Route::get('/coupon-calculation', [CartController::class, 'couponCalculation']);
+
+    Route::get('/coupon-remove', [CartController::class, 'couponRemove']);
