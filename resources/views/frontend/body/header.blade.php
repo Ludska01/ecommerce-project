@@ -10,7 +10,7 @@
               
               <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
               <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-              <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
+              <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
               <li>
                 @auth
                 <a href="{{ route('user.profile') }}"><i class="icon fa fa-user"></i>
@@ -120,7 +120,7 @@
                     <div class="pull-right"> <span class="text">Sub Total :</span>
                       <span class='price'  id="cartSubTotal"> </span> </div>
                     <div class="clearfix"></div>
-                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
+                    <a href="{{ route('checkout') }}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
                   <!-- /.cart-total--> 
                   
                 </li>

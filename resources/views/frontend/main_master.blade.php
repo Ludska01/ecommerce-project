@@ -10,7 +10,7 @@
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
 <title>Ecommerce</title>
-
+<!--Toastr message-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
@@ -31,6 +31,10 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<!--stripe payment-->
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://unpkg.com/@stripe/react-stripe-js@latest/dist/react-stripe.umd.js"></script>
 </head>
 <body class="cnt-home">
 <!-- ============================================== HEADER ============================================== -->
@@ -612,7 +616,7 @@ function cartIncrement(rowId){
         success:function(data){
           miniCart();
           couponCalculation();
-          $('#CouponEnter').hide();
+         
 
           const Toast = Swal.mixin({
                    toast: true,
@@ -621,7 +625,7 @@ function cartIncrement(rowId){
                    showConfirmButton: false,
                    timer: 3000
                  })
-             if ($.isEmptyObject(data.error)) {
+             if ($.isEmptyObject(data.error)) { $('#CouponEnter').hide();
                  Toast.fire({
                      type: 'success',
                      icon: 'success',

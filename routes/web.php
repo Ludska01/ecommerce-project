@@ -14,6 +14,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -308,8 +310,35 @@ Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMi
 
 Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'addToWishlist']);
 
+//cart show
 
+Route::get('/mycart', [CartPageController::class, 'myCart'])->name('mycart');
+
+Route::get('/user/get-cart-product', [CartPageController::class, 'getCartProduct']);
+
+Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'removeCartProduct']);
+
+Route::get('/cart-increment/{rowId}', [CartPageController::class, 'cartIncrement']);
+
+Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'cartDecrement']);
+
+// Frontend Coupon Option
+
+Route::post('/coupon-apply', [CartController::class, 'couponApply']);
+
+Route::get('/coupon-calculation', [CartController::class, 'couponCalculation']);
+
+Route::get('/coupon-remove', [CartController::class, 'couponRemove']);
+
+//checkout ajax
+
+Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'districtGetAjax']);
+
+Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'stateGetAjax']);
+
+Route::post('/stripe/order', [StripeController::class, 'stripeOrder'])->name('stripe.order');
 //protected for login users
+
 Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'],function(){
     //wishlist
 
@@ -319,28 +348,16 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
 
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
 
- 
+    //checkout
+
+    Route::get('/checkout', [CartController::class, 'checkoutCreate'])->name('checkout');
+
+    Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
+
+    
+
 
 
 });
 
 
-   //cart show
-
-    Route::get('/mycart', [CartPageController::class, 'myCart'])->name('mycart');
-
-    Route::get('/user/get-cart-product', [CartPageController::class, 'getCartProduct']);
-
-    Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'removeCartProduct']);
-
-    Route::get('/cart-increment/{rowId}', [CartPageController::class, 'cartIncrement']);
-
-    Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'cartDecrement']);
-
-  // Frontend Coupon Option
-
-    Route::post('/coupon-apply', [CartController::class, 'couponApply']);
-
-    Route::get('/coupon-calculation', [CartController::class, 'couponCalculation']);
-
-    Route::get('/coupon-remove', [CartController::class, 'couponRemove']);
