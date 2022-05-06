@@ -26,9 +26,9 @@
 					  <table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Division Name </th> 
+								<th>State Name </th> 
 								<th>District Name </th>
-								<th>State Name </th>
+								<th>Region Name </th>
 								<th>Action</th>
 
 							</tr>
@@ -69,7 +69,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Add State </h3>
+				  <h3 class="box-title">Add Region </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -82,10 +82,10 @@
 
 
 <div class="form-group">
-	<h5>Division Select <span class="text-danger">*</span></h5>
+	<h5>State Select <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select Division</option>
+			<option value="" selected="" disabled="">Select State</option>
 			@foreach($division as $div)
 			<option value="{{ $div->id }}">{{ $div->division_name }}</option>	
 			@endforeach
@@ -116,7 +116,7 @@
 
 
 	 <div class="form-group">
-		<h5>State Name  <span class="text-danger">*</span></h5>
+		<h5>Region Name  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="state_name" class="form-control" > 
 	 @error('state_name	') 

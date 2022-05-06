@@ -183,7 +183,7 @@
 									@if (session()->get('language') == 'serbian')
 									<label class="info-title control-label">Izaberi broju<span> </span></label>
 									<select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
-										<option selected="" disabled="">--Izaberi boju--</option>
+									
 										@foreach($product_color_srb as $color)
 										<option value="{{ $color }}">{{ ucwords($color) }}</option>
 										 @endforeach
@@ -191,7 +191,7 @@
 									@else
 									<label class="info-title control-label">Choose Color <span> </span></label>
 									<select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
-											<option selected="" disabled="">--Choose Color--</option>
+											
 											@foreach($product_color_en as $color)
 											<option value="{{ $color }}">{{ ucwords($color) }}</option>
 											 @endforeach
@@ -212,7 +212,7 @@
 										@if (session()->get('language') == 'serbian')
 										<label class="info-title control-label">Izaberi velicinu<span> </span></label>
 										<select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
-											<option selected="" disabled="">--Izaberi velicinu--</option>
+											
 											@foreach($product_size_srb as $size)
 											<option value="{{ $size }}">{{ ucwords($size) }}</option>
 											 @endforeach
@@ -220,7 +220,7 @@
 										@else
 										<label class="info-title control-label">Choose Size <span> </span></label>
 										<select class="form-control unicase-form-control selectpicker" style="display: none;" required>
-											<option selected="" disabled="">--Choose Size--</option>
+											
 											@foreach($product_size_en as $size)
 											<option value="{{ $size }}">{{ ucwords($size) }}</option>
 											 @endforeach

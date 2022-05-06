@@ -5,7 +5,9 @@ use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -13,7 +15,9 @@ use App\Http\Controllers\Backend\SubSubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\WishlistController;
@@ -240,6 +244,64 @@ Route::middleware(['auth:admin'])->group(function(){
         
         });
 
+        //Orders admin
+
+        Route::prefix('orders')->group(function(){
+
+            Route::get('/pending/orders', [OrderController::class, 'pendingOrders'])->name('pending-orders');
+
+            Route::get('/pending/orders/details/{order_id}', [OrderController::class, 'pendingOrdersDetails'])->name('pending.order.details');
+
+            Route::get('/confirmed/orders', [OrderController::class, 'confirmedOrders'])->name('confirmed-orders');
+
+            Route::get('/processing/orders', [OrderController::class, 'processingOrders'])->name('processing-orders');
+
+            Route::get('/picked/orders', [OrderController::class, 'pickedOrders'])->name('picked-orders');
+
+            Route::get('/shipped/orders', [OrderController::class, 'shippedOrders'])->name('shipped-orders');
+
+            Route::get('/delivered/orders', [OrderController::class, 'deliveredOrders'])->name('delivered-orders');
+
+            Route::get('/cancel/orders', [OrderController::class, 'cancelOrders'])->name('cancel-orders');
+
+            Route::get('/pending/confirm/{order_id}', [OrderController::class, 'pendingToConfirm'])->name('pending-confirm');
+
+            Route::get('/confirm/processing/{order_id}', [OrderController::class, 'confirmToProcessing'])->name('confirm.processing');
+
+            Route::get('/processing/picked/{order_id}', [OrderController::class, 'processingToPicked'])->name('processing.picked');
+
+            Route::get('/picked/shipped/{order_id}', [OrderController::class, 'pickedToShipped'])->name('picked.shipped');
+
+            Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'shippedToDelivered'])->name('shipped.delivered');
+
+            Route::get('/invoice/download/{order_id}', [OrderController::class, 'adminInvoiceDownload'])->name('invoice.download');
+                        
+            
+        });
+
+        // Admin Reports Routes 
+        Route::prefix('reports')->group(function(){
+
+            Route::get('/view', [ReportController::class, 'reportView'])->name('all-reports');
+
+            Route::post('/search/by/date', [ReportController::class, 'reportByDate'])->name('search-by-date');
+
+            Route::post('/search/by/month', [ReportController::class, 'reportByMonth'])->name('search-by-month');
+
+            Route::post('/search/by/year', [ReportController::class, 'reportByYear'])->name('search-by-year');
+        
+        
+        });
+
+
+        // Admin Get All User Routes 
+        Route::prefix('alluser')->group(function(){
+
+            Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');
+            
+    
+        });
+
 
 });//end of admin middleware
 
@@ -268,14 +330,7 @@ Route::middleware([
 });
 
 Route::get('/',[IndexController::class, 'index'])->name('index');
-Route::get('/user/logout',[IndexController::class, 'userLogout'])->name('user.logout');
-Route::get('/user/profile',[IndexController::class, 'userProfile'])->name('user.profile');
-Route::get('/user/change/password',[IndexController::class, 'userChangePassword'])->name('user.change.password');
 
-
-
-
-Route::post('/user/password/store',[IndexController::class, 'updatePassword'])->name('user.password.store');
 Route::post('/user/profile/store',[IndexController::class, 'userProfileStore'])->name('user.profile.store');
 
 // frontend 
@@ -337,9 +392,22 @@ Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'dist
 Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'stateGetAjax']);
 
 Route::post('/stripe/order', [StripeController::class, 'stripeOrder'])->name('stripe.order');
+
+Route::post('/cash/order', [CashController::class, 'cashOrder'])->name('cash.order');
+
+
 //protected for login users
 
 Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'],function(){
+
+
+    Route::get('/user/logout',[IndexController::class, 'userLogout'])->name('user.logout');
+
+    Route::get('/user/profile',[IndexController::class, 'userProfile'])->name('user.profile');
+
+    Route::get('/user/change/password',[IndexController::class, 'userChangePassword'])->name('user.change.password');
+
+    Route::post('/user/password/store',[IndexController::class, 'updatePassword'])->name('user.password.store');
     //wishlist
 
     Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
@@ -354,7 +422,21 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
 
     Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
 
-    
+
+
+    //orders
+
+    Route::get('/myorders',[AllUserController::class, 'myOrders'])->name('my.orders');
+
+    Route::get('/order_details/{order_id}', [AllUserController::class, 'orderDetails']);
+
+    Route::get('/invoice_download/{order_id}', [AllUserController::class, 'invoiceDownload']);
+
+    Route::post('/return/order/{order_id}', [AllUserController::class, 'returnOrder'])->name('return.order');
+
+    Route::get('/return/order/list', [AllUserController::class, 'returnOrderList'])->name('return.order.list');
+
+    Route::get('/cancel/orders', [AllUserController::class, 'cancelOrders'])->name('cancel.orders');
 
 
 

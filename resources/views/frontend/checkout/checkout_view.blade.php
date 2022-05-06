@@ -63,7 +63,7 @@
 
 
 	  <div class="form-group">
-	    <label class="info-title" for="exampleInputEmail1"><b>Post Code </b> <span>*</span></label>
+	    <label class="info-title" for="exampleInputEmail1"><b>Post Code , Address </b> <span>*</span></label>
 	    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="">
 	  </div>  <!-- // end form group  -->
 
@@ -84,7 +84,7 @@
 	<h5><b>Division Select </b> <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control" required="" >
-			<option value="" selected="" disabled="">Select Division</option>
+			<option value="" selected="" disabled="">Select State</option>
 			@foreach($divisions as $item)
  <option value="{{ $item->id }}">{{ $item->division_name }}</option>	
 			@endforeach
@@ -114,7 +114,7 @@
 	<h5><b>State Select</b> <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="state_id" class="form-control" required="" >
-			<option value="" selected="" disabled="">Select State</option>
+			<option value="" selected="" disabled="">Select region</option>
 			 
 		</select>
 		@error('state_id') 

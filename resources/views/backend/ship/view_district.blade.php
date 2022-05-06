@@ -26,7 +26,7 @@
 					  <table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Division Name </th> 
+								<th>State Name </th> 
 								<th>District Name </th>
 								<th>Action</th>
 
@@ -80,10 +80,10 @@
 
 
 <div class="form-group">
-	<h5>Division Select <span class="text-danger">*</span></h5>
+	<h5>State Select <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select Division</option>
+			<option value="" selected="" disabled="">Select State</option>
 			@foreach($division as $div)
 			<option value="{{ $div->id }}">{{ $div->division_name }}</option>	
 			@endforeach

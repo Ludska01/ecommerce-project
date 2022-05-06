@@ -63,7 +63,20 @@ class StripeController extends Controller
         'created_at' => Carbon::now(),	 
 
     ]);
-    
+
+      $carts = Cart::content();
+    foreach ($carts as $cart) {//dd($cart->qty);
+        OrderItem::insert([
+            'order_id' => $order_id, 
+            'product_id' => $cart->id,
+            'color' => $cart->options->color,
+            'size' => $cart->options->size,
+            'qty' => $cart->qty,
+            'price' => $cart->price,
+            'created_at' => Carbon::now(),
+
+        ]);
+    }
       // Start Send Email 
       $invoice = Order::find($order_id);
       $data = [
@@ -77,19 +90,7 @@ class StripeController extends Controller
 
       // End Send Email 
 
-    $carts = Cart::content();
-    foreach ($carts as $cart) {
-        OrderItem::insert([
-            'order_id' => $order_id, 
-            'product_id' => $cart->id,
-            'color' => $cart->options->color,
-            'size' => $cart->options->size,
-            'qty' => $cart->qty,
-            'price' => $cart->price,
-            'created_at' => Carbon::now(),
-
-        ]);
-    }
+  
 
 
     if (Session::has('coupon')) {

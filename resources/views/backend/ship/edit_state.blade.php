@@ -36,10 +36,10 @@
 
 
 <div class="form-group">
-	<h5>Division Select <span class="text-danger">*</span></h5>
+	<h5>State Select <span class="text-danger">*</span></h5>
 	<div class="controls">
 		<select name="division_id" class="form-control"  >
-			<option value="" selected="" disabled="">Select Division</option>
+			<option value="" selected="" disabled="">Select State</option>
 			@foreach($division as $div)
 			<option value="{{ $div->id }}" {{ $div->id == $state->division_id ? 'selected': '' }}>{{ $div->division_name }}</option>	
 			@endforeach
@@ -70,7 +70,7 @@
 
 
 	 <div class="form-group">
-		<h5>State Name  <span class="text-danger">*</span></h5>
+		<h5>Region Name  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="state_name" class="form-control" value="{{ $state->state_name }}"> 
 	 @error('state_name	') 

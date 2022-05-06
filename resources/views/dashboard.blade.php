@@ -5,17 +5,7 @@
 <div class="body-content">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <br>
-                <img class='card-img-top' style="border-radius: 50%" height="100%" width="100%"src="{{ (!empty($user->profile_photo_path)) ? url('upload/user_images/'.$user->profile_photo_path) : url('upload\admin_images\No-Image-Placeholder.svg.png')}}">
-                <br><br>
-                <ul class="list-group list-group-flush">
-                    <a href="{{ url('/') }}" class="btn btn-primary btn-sm btn-block">Home</a>
-                    <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block">Profile update</a>
-                    <a href="{{ route('user.change.password') }}" class="btn btn-primary btn-sm btn-block">Change password</a>
-                    <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
-                </ul>
-            </div><!--end col md2-->
+           @include('frontend.widgets.user_sidebar')
             <div class="col-md-2">
 
             </div><!--end col md2-->

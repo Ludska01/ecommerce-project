@@ -18,7 +18,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Division List</h3>
+				  <h3 class="box-title">State List</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -26,7 +26,7 @@
 					  <table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Division Name </th> 
+								<th>State Name </th> 
 								<th>Action</th>
 
 							</tr>
@@ -65,7 +65,7 @@
 
 			 <div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Add Division </h3>
+				  <h3 class="box-title">Add State </h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -77,7 +77,7 @@
 
 
 	 <div class="form-group">
-		<h5>Division Name  <span class="text-danger">*</span></h5>
+		<h5>State Name  <span class="text-danger">*</span></h5>
 		<div class="controls">
 	 <input type="text"  name="division_name" class="form-control" > 
 	 @error('division_name') 
