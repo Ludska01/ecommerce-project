@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
@@ -167,4 +168,16 @@ class IndexController extends Controller
 		));
 
 	}
+
+    // Product Seach 
+	public function ProductSearch(Request $request){
+		$item = $request->search;
+		// echo "$item";
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+		$products = Product::where('product_name_en','LIKE',"%$item%")->paginate(6);
+		return view('frontend.product.product_filter_view',compact('products'));
+    }
+
+
+    
 }

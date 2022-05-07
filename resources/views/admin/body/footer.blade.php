@@ -5,9 +5,9 @@
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li> --}}
 		  <li class="nav-item">
-			<a class="nav-link" href="#">Github</a>
+			<a class="nav-link" href="https://github.com/Ludska01">Github</a>
 		  </li>
 		</ul>
     </div>
-	  &copy; 2022 <a href="#">Ecommerce project</a>. By Luka Lazarevic.
+	  &copy; 2022 <a href="https://github.com/Ludska01/ecommerce-project">Ecommerce project</a>. By Luka Lazarevic.
   </footer>

@@ -7,7 +7,7 @@
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
-              
+              <li><a href="" type="button" data-toggle="modal" data-target="#ordertraking"><i class="icon fa fa-check"></i>Order Traking</a></li>
               <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
               <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
@@ -29,13 +29,7 @@
           
           <div class="cnt-block">
             <ul class="list-unstyled list-inline">
-              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">USD</a></li>
-                  <li><a href="#">INR</a></li>
-                  <li><a href="#">GBP</a></li>
-                </ul>
-              </li>
+
               <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value"> 
                 @if (session()->get('language') == 'serbian')
                   Jezik: Srpski
@@ -69,7 +63,10 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
             <!-- ============================================================= LOGO ============================================================= -->
-            <div class="logo"> <a href="{{ url('/') }}"> <img src="assets/images/logo.png" alt="logo"> </a> </div>
+            @php
+            $setting = App\Models\SiteSetting::find(1);
+             @endphp
+            <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset($setting->logo) }}" alt="logo"> </a> </div>
             <!-- /.logo --> 
             <!-- ============================================================= LOGO : END ============================================================= --> </div>
           <!-- /.logo-holder -->
@@ -78,22 +75,15 @@
             <!-- /.contact-row --> 
             <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
-              <form>
-                <div class="control-group">
-                  <ul class="categories-filter animate-dropdown">
-                    <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
-                      <ul class="dropdown-menu" role="menu" >
-                        <li class="menu-header">Computer</li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Clothing</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Electronics</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Shoes</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Watches</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <input class="search-field" placeholder="Search here..." />
-                  <a class="search-button" href="#" ></a> </div>
+              <form method="post" action="{{ route('product.search') }}">
+                @csrf
+                
+                <input class="search-field" name="search" placeholder="Search here..." />
+                  <button class="search-button" type="submit"></button> 
+                
+               
               </form>
+              <div id="searchProducts"></div>
             </div>
             <!-- /.search-area --> 
             <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
@@ -200,7 +190,7 @@
                   </li>
                   @endforeach
                   
-                  <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                  <li class="dropdown  navbar-right special-menu"> <a href="{{ route('home.blog') }}">Blog</a> </li>
                 </ul>
                 <!-- /.navbar-nav -->
                 <div class="clearfix"></div>
@@ -219,5 +209,40 @@
     </div>
     <!-- /.header-nav --> 
     <!-- ============================================== NAVBAR : END ============================================== --> 
+
+    <!-- Order Tracking Modal -->
+<div class="modal fade" id="ordertraking" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Track Your Order </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form method="post" action="{{ route('order.tracking') }}">
+          @csrf
+         <div class="modal-body">
+          <label>Invoice Code</label>
+          <input type="text" name="code" required="" class="form-control" placeholder="Your Order Invoice Number">           
+         </div>
+
+         <button class="btn btn-danger" type="submit" style="margin-left: 17px;"> Track Now </button>
+
+        </form> 
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
     
   </header>
+
+
+</header>
+
+

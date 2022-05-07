@@ -18,7 +18,7 @@
 
 <a href="{{ route('return.order.list') }}" class="btn btn-primary btn-sm btn-block">Returned Orders</a>
 
-<a href="{{ route('cancel.orders') }}" class="btn btn-primary btn-sm btn-block">Canceled Orders</a>
+
 
 <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
 

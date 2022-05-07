@@ -103,7 +103,17 @@
                     <tr>
                       <th> Order : </th>
                        <th>   
+                        
+                        @if($order->return_order == 0) 
                         <span class="badge badge-pill badge-warning" style="background: #418DB9;">{{ $order->status }} </span> </th>
+                        @elseif($order->return_order == 1)
+                        <span class="badge badge-pill badge-warning" style="background: #800000;"> Pedding </span>
+                        <span class="badge badge-pill badge-warning" style="background:red;">Return Requested </span>
+                       
+                        @elseif($order->return_order == 2)
+                         <span class="badge badge-pill badge-warning" style="background: #008000;">Success </span>
+                         @endif
+
                     </tr>
         
         
@@ -233,7 +243,7 @@
         
         
                 @if($order)
-             
+                    
         
                       <form action="{{ route('return.order',$order->id) }}" method="post">
                         @csrf
@@ -242,7 +252,7 @@
                 
                   </div>
                   <br>
-                  <button type="submit" class="btn btn-danger">Submit</button>
+                  <button type="submit" class="btn btn-danger">Order Return</button>
 
                 </form>
               @else

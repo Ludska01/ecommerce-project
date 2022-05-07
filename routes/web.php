@@ -2,17 +2,23 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\AdminUserController;
+use App\Http\Controllers\User\ReviewController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ShippingAreaController;
+use App\Http\Controllers\Backend\SiteSettingControler;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubSubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeBlogController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\AllUserController;
@@ -154,7 +160,7 @@ Route::middleware(['auth:admin'])->group(function(){
         Route::get('/inactive/{id}', [ProductController::class, 'ProductInactive'])->name('product.inactive');
         Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
         Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product.active');
-
+        Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
 
 
 
@@ -298,9 +304,86 @@ Route::middleware(['auth:admin'])->group(function(){
         Route::prefix('alluser')->group(function(){
 
             Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');
+
+            Route::get('/all/admin', [AdminUserController::class, 'allAdminRole'])->name('all.admin.user');
+
+            Route::get('/add', [AdminUserController::class, 'addAdminRole'])->name('add.admin');
+
+            Route::post('/store', [AdminUserController::class, 'storeAdminRole'])->name('admin.user.store');
+
+            Route::get('/edit/{id}', [AdminUserController::class, 'EditAdminRole'])->name('edit.admin.user');
+
+            Route::post('/update', [AdminUserController::class, 'UpdateAdminRole'])->name('admin.user.update');
+
+            Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdminRole'])->name('delete.admin.user');
             
     
         });
+
+        // admin blog routes
+        Route::prefix('blog')->group(function(){
+
+            Route::get('/category', [BlogController::class, 'blogCategory'])->name('blog.category');
+            
+            Route::post('/store', [BlogController::class, 'blogCategoryStore'])->name('blogcategory.store');
+
+            Route::get('/category/edit/{id}', [BlogController::class, 'blogCategoryEdit'])->name('blog.category.edit');
+
+            Route::get('/remove/category/{id}', [BlogController::class, 'removeBlogCategory'])->name('blog.category.delete');
+
+            Route::post('/update', [BlogController::class, 'blogCategoryUpdate'])->name('blogcategory.update');
+
+            // Admin View Blog Post Routes 
+
+            Route::get('/list/post', [BlogController::class, 'listBlogPost'])->name('list.post');
+
+            Route::get('/add/post', [BlogController::class, 'addBlogPost'])->name('add.post');
+
+            Route::get('/remove/post/{id}', [BlogController::class, 'removeBlogPost'])->name('remove.post');
+
+            Route::post('/post/store', [BlogController::class, 'blogPostStore'])->name('post-store');
+            
+        }); 
+
+        //site setting routes 
+
+        // Admin Site Setting Routes 
+        Route::prefix('setting')->group(function(){
+
+            Route::get('/site', [SiteSettingControler::class, 'siteSetting'])->name('site.setting');
+        
+            Route::post('/site/update', [SiteSettingControler::class, 'siteSettingUpdate'])->name('update.sitesetting');
+
+            Route::get('/seo', [SiteSettingControler::class, 'seoSetting'])->name('seo.setting'); 
+
+            Route::post('/seo/update', [SiteSettingControler::class, 'seoSettingUpdate'])->name('update.seosetting');
+        
+        });
+
+
+        // Admin Return Order Routes 
+        Route::prefix('return')->group(function(){
+
+            Route::get('/admin/request', [ReturnController::class, 'returnRequest'])->name('return.request');
+
+            Route::get('/admin/return/approve/{order_id}', [ReturnController::class, 'returnRequestApprove'])->name('return.approve');
+
+            Route::get('/admin/all/request', [ReturnController::class, 'returnAllRequest'])->name('all.request');
+        
+        });
+
+        // Admin Manage Review Routes 
+        Route::prefix('review')->group(function(){
+
+            Route::get('/pending', [ReviewController::class, 'pendingReview'])->name('pending.review');
+            
+            Route::get('/admin/approve/{id}', [ReviewController::class, 'reviewApprove'])->name('review.approve');
+            
+            Route::get('/publish', [ReviewController::class, 'publishReview'])->name('publish.review');
+
+            Route::get('/delete/{id}', [ReviewController::class, 'deleteReview'])->name('delete.review');
+            
+            });
 
 
 });//end of admin middleware
@@ -395,6 +478,18 @@ Route::post('/stripe/order', [StripeController::class, 'stripeOrder'])->name('st
 
 Route::post('/cash/order', [CashController::class, 'cashOrder'])->name('cash.order');
 
+//blog User routes 
+
+Route::get('/blog', [HomeBlogController::class, 'addBlogPost'])->name('home.blog');
+
+Route::get('/post/details/{id}', [HomeBlogController::class, 'detailsBlogPost'])->name('post.details');
+
+Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'homeBlogCatPost']);
+
+/// Product Search Route 
+Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+
+
 
 //protected for login users
 
@@ -438,7 +533,12 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
 
     Route::get('/cancel/orders', [AllUserController::class, 'cancelOrders'])->name('cancel.orders');
 
+    /// Frontend Product Review Routes
 
+    Route::post('/review/store', [ReviewController::class, 'reviewStore'])->name('review.store');
+
+    /// Order Traking Route 
+    Route::post('/order/tracking', [AllUserController::class, 'OrderTraking'])->name('order.tracking');  
 
 });
 

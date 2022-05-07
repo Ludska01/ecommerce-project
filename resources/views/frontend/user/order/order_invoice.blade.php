@@ -1,3 +1,10 @@
+@php
+            $setting = App\Models\SiteSetting::find(1);
+             @endphp
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -48,14 +55,14 @@
     <tr>
         <td valign="top">
           <!-- {{-- <img src="" alt="" width="150"/> --}} -->
-          <h2 style="color: green; font-size: 26px;"><strong>Ecommerce</strong></h2>
+          <h2 style="color: green; font-size: 26px;"><strong>{{ $setting->company_name }}</strong></h2>
         </td>
         <td align="right">
             <pre class="font" >
-               Shop Head Office
-               Email:support@ecommerce.com <br>
-               Mob: 1245454545 <br>
-               Cara lazara 12 <br>
+               {{ $setting->company_name }}
+               Email:{{ $setting->email }} <br>
+               Mob: {{ $setting->phone_one }} <br>
+               {{ $setting->company_address }} <br>
               
             </pre>
         </td>

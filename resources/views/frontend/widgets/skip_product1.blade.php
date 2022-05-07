@@ -44,7 +44,7 @@
     <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
 @if(session()->get('language') == 'serbian') {{ $product->product_name_srb }} @else {{ $product->product_name_en }} @endif
       </a></h3>
-    <div class="rating rateit-small"></div>
+    
     <div class="description"></div>
 
    @if ($product->discount_price == NULL)

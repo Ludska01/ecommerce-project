@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class OrderController extends Controller
 {
     // Pending Orders 
 	public function pendingOrders(){
-		$orders = Order::where('status','Pending')->orderBy('id','DESC')->get();
+		$orders = Order::where('status','pending')->orderBy('id','DESC')->get();
 		return view('backend.orders.pending_orders',compact('orders'));
 
 	} // end mehtod 
@@ -79,7 +81,7 @@ class OrderController extends Controller
 
     public function pendingToConfirm($order_id){
 
-        Order::findOrFail($order_id)->update(['status' => 'confirm']);
+        Order::findOrFail($order_id)->update(['status' => 'confirm','confirmed_date' => Carbon::now()->format('Y-m-d')]);
   
         $notification = array(
               'message' => 'Order Confirmed Successfully',
@@ -139,6 +141,12 @@ class OrderController extends Controller
   
   
        public function shippedToDelivered($order_id){
+
+		$product = OrderItem::where('order_id',$order_id)->get();
+		foreach ($product as $item) {
+			Product::where('id',$item->product_id)
+					->update(['product_qty' => DB::raw('product_qty-'.$item->qty)]);
+		} 
   
         Order::findOrFail($order_id)->update(['status' => 'delivered','delivered_date' => Carbon::now()->format('Y-m-d')]);
   
