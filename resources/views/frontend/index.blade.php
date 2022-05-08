@@ -53,7 +53,7 @@
           
                     <div class="big-text fadeInDown-1">{{ $slider->title }} </div>
                     <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{ $slider->description }}</span> </div>
-                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                   
                   </div>
                   <!-- /.caption --> 
                 </div>
@@ -103,7 +103,7 @@
                         <h4 class="info-box-heading green">Special Sale</h4>
                       </div>
                     </div>
-                    <h6 class="text">Extra $5 off on all items </h6>
+                    <h6 class="text">Special sales all the time </h6>
                   </div>
                 </div>
                 <!-- .col --> 

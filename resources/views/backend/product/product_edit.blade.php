@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <h5>Select SubSubCategory<span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <select name="subsubcategory_id" id="select" required class="form-control" aria-invalid="false">
+                                    <select name="subsubcategory_id" id="select"  class="form-control" aria-invalid="false">
                                         <option value="" selected disabled>Select SubSubCategory</option>
                                          @foreach ($subsubcats as $subsubcat )
                                         <option value="{{ $subsubcat->id }}" {{ ($subsubcat->id==$product->subsubcategory_id)?'selected':' ' }}>{{ $subsubcat->subsubcategory_name_en }}</option> 

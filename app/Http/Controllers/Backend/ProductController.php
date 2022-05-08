@@ -231,8 +231,10 @@ class ProductController extends Controller
         $imgDel = Product::find($id);
 
         $image = $request->product_thumbnail;
-
-        unlink($imgDel->product_thumbnail);
+       
+            unlink($imgDel->product_thumbnail);
+       
+        
             
             $name_gen= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);

@@ -73,7 +73,7 @@
 </div>		
 
 <div class="home-banner outer-top-n outer-bottom-xs">
-<img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }} " alt="Image">
+
 </div>
 				<!-- ======== ====CATEGORY======= === -->
 <div class="sidebar-widget outer-bottom-xs wow fadeInUp">

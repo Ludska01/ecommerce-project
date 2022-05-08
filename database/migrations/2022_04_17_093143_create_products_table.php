@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateProductsTable extends Migration
 {
@@ -18,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('brand_id');
             $table->bigInteger('category_id');
             $table->bigInteger('subcategory_id');
-            $table->bigInteger('subsubcategory_id');
+            $table->bigInteger('subsubcategory_id')->nullable();
             $table->string('product_name_en');
             $table->string('product_name_srb');
             $table->string('product_slug_en');

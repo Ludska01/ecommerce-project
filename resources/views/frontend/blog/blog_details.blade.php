@@ -55,7 +55,7 @@
 
 
 
-
+{{-- 
 			<div class="blog-write-comment outer-bottom-xs outer-top-xs">
 	<div class="row">
 		<div class="col-md-12">
@@ -97,7 +97,7 @@
 			<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Submit Comment</button>
 		</div>
 	</div>
-</div>
+</div> --}}
 				</div>
 				<div class="col-md-3 sidebar">
 
@@ -114,7 +114,7 @@
 </div>		
 
 <div class="home-banner outer-top-n outer-bottom-xs">
-<img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
+
 </div>
 
 
