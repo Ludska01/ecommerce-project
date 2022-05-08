@@ -29,7 +29,7 @@ after this you will have only one admin in your database(you will be able to add
 - admin@gmail.com
 - password
 
-on page /login/admin.
+on page /admin/login.
 
 Please fill in brands and categories and add some products.you also have sql_insert folder with dummy data for site.
 
