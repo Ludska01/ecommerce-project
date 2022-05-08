@@ -2,12 +2,14 @@
         use App\Models\Product;
         use App\Models\Category;
         $skip_category_0 = Category::skip(0)->first();
+        if(isset($skip_category_0)){
     	$skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
+    }
 @endphp
 
 
 
-
+@if (isset($skip_product_0))
 
 
         
@@ -77,4 +79,4 @@
             <!-- /.home-owl-carousel --> 
           </section>
           <!-- /.section --> 
-         
+         @endif

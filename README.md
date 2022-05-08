@@ -2,13 +2,25 @@
 This is my first project of this scale until now i did some smaller projects and this is the combination of that accumulated knowledge.
 I tried to keep everything as organised as possible.
 
-** sdds **
+## Features:
+
+- time limited coupons
+- order tracking 
+- wishlist 
+- automail for confirmation of recived order
+- admin panel
+- blog 
+- rewiews 
+- multiimg
+- recipe
+
 ## Instalation
 
 If you decide to run this project on your pc, in the .env file set the database that shuld be used then 
 in project folder run this commands:
 
 - composer install
+- php artisan key:generate 
 - php artisan migrate --seed
 - php artisan serve
 
@@ -19,10 +31,11 @@ after this you will have only one admin in your database(you will be able to add
 
 on page /login/admin.
 
-Please fill in brands and categories at least two of each and add at least one product from admin panel.
-(I will fix this soon so you can use frontend even if nothing is added)
+Please fill in brands and categories and add some products.
 
 Now you are ready to use the frontend.
+
+If you want to get mails you shuld set that also in .env file.
 
 ## This project uses:
 
@@ -35,6 +48,7 @@ Now you are ready to use the frontend.
 - sweet alerts
 - stripe payment
 - bootstrap
+- lightbox
 - font awesome icons
 - data feather icons
 

@@ -2,10 +2,14 @@
         use App\Models\Product;
         use App\Models\Brand;
         $skip_brand_1 = Brand::skip(1)->first();
-    	$skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
+        if(isset($skip_brand_1)){
+    	  $skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
+        }
 @endphp
 
 
+@if (isset($skip_brand_product_1))
+    
 
 
 <section class="section featured-product wow fadeInUp">
@@ -73,3 +77,4 @@
     <!-- /.home-owl-carousel --> 
   </section>
   <!-- /.section --> 
+  @endif
