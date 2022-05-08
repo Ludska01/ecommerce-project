@@ -31,7 +31,7 @@ after this you will have only one admin in your database(you will be able to add
 
 on page /login/admin.
 
-Please fill in brands and categories and add some products.you also have sql_insert foler with dummy data for site.
+Please fill in brands and categories and add some products.you also have sql_insert folder with dummy data for site.
 
 Now you are ready to use the frontend.
 
