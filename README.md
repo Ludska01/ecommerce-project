@@ -37,6 +37,8 @@ Now you are ready to use the frontend.
 
 If you want to get mails you shuld set that also in .env file.
 
+For stripe payment use dummy card 4242 4242 4242 4242 any cv code and future exp date.
+
 ## This project uses:
 
 - laravel 8
