@@ -1,6 +1,8 @@
 ## About this project 
 This is my first project of this scale until now i did some smaller projects and this is the combination of that accumulated knowledge.
 I tried to keep everything as organised as possible.
+
+** sdds **
 ## Instalation
 
 If you decide to run this project on your pc, in the .env file set the database that shuld be used then 
