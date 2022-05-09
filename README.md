@@ -13,6 +13,7 @@ I tried to keep everything as organised as possible.
 - rewiews 
 - multiimg
 - recipe
+- multi language 
 
 ## Instalation
 
